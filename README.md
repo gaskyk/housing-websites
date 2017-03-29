@@ -36,7 +36,7 @@ The Zoopla data collected and used in *Zoopla ML caravans.py* is not shown as it
   "price": 220000,
   "property_type": "Detached house",
   "street_name": "Acacia Avenue Fareham",
-  "parkhoome": 0
+  "parkhome": 0
 }
 ```
 

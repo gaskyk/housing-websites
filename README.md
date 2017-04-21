@@ -14,7 +14,12 @@ This work was driven by the need to accurately identify the location of caravan 
 
 To obtain data from the Zoopla API, an API key is required which can be obtained from the [Zoopla developer pages](http://developer.zoopla.com/). No API key is required for accessing the [Nestoria API](http://www.nestoria.co.uk/help/api).
 
-All code is written using Python 3.4, with different packages required by each file.
+All code is written using Python 3.4, with different packages required by each file. Overall the following packages are required:
+- scikit-learn
+- scipy
+- numpy
+- pandas
+- requests
 
 ### Data
 

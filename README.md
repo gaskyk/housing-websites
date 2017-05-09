@@ -48,3 +48,7 @@ The Zoopla data collected and used in *Zoopla ML caravans.py* is not shown as it
 ## Contributors
 
 [Karen Gask](https://github.com/gaskyk), working for the [Office for National Statistics Big Data project](https://www.ons.gov.uk/aboutus/whatwedo/programmesandprojects/theonsbigdataproject)
+
+## Licence
+
+Released under the [GNU General Public License, version 3](https://github.com/ONSBigData/Who-you-work-with/blob/master/LICENSE).

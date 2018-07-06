@@ -1,10 +1,14 @@
 __author__ = 'Karen'
 
-# Collect as much information from the Nestoria API (property listings only)
+"""
+Collect as much information from the Nestoria API (property listings only)
+Refer to Nestoria API page for terms of use: https://www.nestoria.co.uk/help/api
+"""
 
 from requests import get
 import json
 import pandas as pd
+import time
 
 def get_nestoria(type):
 
@@ -12,13 +16,14 @@ def get_nestoria(type):
 
     # Run first API call for first web page only
     # This gets number of web pages required for area and checks the API is working
-    api = 'http://api.nestoria.co.uk/api?action=search_listings'
+    api = 'https://api.nestoria.co.uk/api?action=search_listings'
     place = '&place_name=' + area_name
     listing_type = '&listing_type=' + type
     json_uk = '&encoding=json&pretty=1&country=uk'
+    results_max = '&number_of_results=50' # API default shows 20 results per page. Include this to get maximum 50 per page
     page = '&page='
 
-    api_input = api + place + listing_type + json_uk
+    api_input = api + place + listing_type + json_uk + results_max
     response = get(api_input)
 
     # Check API has worked
@@ -45,7 +50,7 @@ def get_nestoria(type):
     # Run second API call for all pages for this area
     homes = pd.DataFrame()
     for i in range(1, web_pages+1):
-        api_input = api + place + listing_type + json_uk + page + str(i)
+        api_input = api + place + listing_type + json_uk + results_max + page + str(i)
         response = get(api_input)
         content_as_string = response.content.decode()
         content = json.loads(content_as_string)
@@ -60,12 +65,13 @@ def get_nestoria(type):
             homes = listings
         else:
             homes = homes.append(listings)
+        time.sleep(2)  # Nestoria API requires at least 1 second between API calls
 
     # Keep selected columns
     if homes.empty:
         homes = homes
     else:
-        homes = homes[['bathroom_number','bedroom_number','car_spaces','construction_year','datasource_name','guid',
+        homes = homes[['bathroom_number','bedroom_number','car_spaces','construction_year','datasource_name',
                        'keywords','latitude','longitude','lister_name','listing_type','location_accuracy','price',
                        'property_type','summary','title','updated_in_days']]
 
